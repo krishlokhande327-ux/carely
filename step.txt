@@ -1,0 +1,31 @@
+step 1: create vertual environment
+ 1. py -3 -m venv venv
+
+step 2: activate vertual environment
+ 1. .\venv\Scripts\Activate.ps1
+
+step 3:install django
+ 1. pip install django
+
+step 4: verification 
+    py -3 -m django --version
+
++------------------------------------------------+
+STEP 5: startproject
+1.django-admin startproject mysite_project_file .
+
+step 6: startapp
+1. py -3 manage.py startapp home_app_file
++------------------------------------------------+
+Add the app in startproject files " " setting->INSTALLED_APPS
+Add the function fo app files view in project file urls
+GET = GET DATA
+
+POST = GIVE DATA
++_____________________________________________________+
+
+
+ggg
+
+
+group@12345
