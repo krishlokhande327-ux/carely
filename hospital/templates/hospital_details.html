@@ -128,7 +128,7 @@
             z-index: 5;
         }
 
-        .hero-btn {
+        .icon-btn {
             width: 36px;
             height: 36px;
 
@@ -648,7 +648,7 @@
 
     <!-- BOTTOM / TOP NAVIGATION (position flips via CSS depending on screen size) -->
     <div class="bottom-nav">
-        <a href="{% url 'hospital-home' %}" class="nav-item active"><i class="bi bi-house-door-fill"></i><span>Home</span></a>
+        <a href="{% url 'hospital-home' %}" class="nav-item"><i class="bi bi-house-door"></i><span>Home</span></a>
         <a href="{% url 'medicines' %}" class="nav-item"><i class="bi bi-capsule"></i><span>Medicines</span></a>
         <a href="{% url 'speciality' %}" class="nav-item"><i class="bi bi-bank"></i><span>Speciality</span></a>
     </div>
@@ -700,7 +700,7 @@
                     <div class="hero-nav">
 
                         <div
-                            class="hero-btn"
+                            class="icon-btn"
                             onclick="history.back()"
                         >
                             <i class="bi bi-arrow-left"></i>
@@ -710,7 +710,14 @@
                         <div class="hero-actions">
 
                             <div
-                                class="hero-btn"
+                                class="icon-btn"
+                                onclick="shareHospital()"
+                            >
+                                <i class="bi bi-share"></i>
+                            </div>
+
+                            <div
+                                class="icon-btn"
                                 onclick="toggleFavorite(this)"
                             >
                                 <i class="bi bi-heart"></i>
@@ -855,7 +862,7 @@
 
             <div class="services-grid">
 
-                {% for se in hospital.servise.all %}
+                {% for se in hospital.servise %}
 
                     <div class="service-item">
 
@@ -909,7 +916,7 @@
 
             <div class="services-grid scheme-grid">
 
-                {% for se in hospital.schemes.all %}
+                {% for se in hospital.schemes %}
 
                     <div class="service-item">
 

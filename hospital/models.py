@@ -31,3 +31,31 @@ class speciality(models.Model):
 
     def __str__(self):
         return self.speciality
+    
+class Composition(models.Model):
+    """Active ingredient + strength, e.g. Paracetamol 500mg — shared by
+    branded and generic medicines so matching is an exact ID join."""
+    salt_name = models.CharField(max_length=200)   # e.g. "Paracetamol"
+    strength = models.CharField(max_length=50)      # e.g. "500mg"
+
+    class Meta:
+        unique_together = ('salt_name', 'strength')
+
+    def __str__(self):
+        return f"{self.salt_name} {self.strength}"
+    
+class Medicine(models.Model):
+    # --- keep your existing fields here, e.g.: ---
+    image = models.ImageField(upload_to='hospital_images/', null=True, blank=True)    
+    name = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    tablets = models.FloatField(default=0.0)
+    Group_name = models.TextField(blank=True)
+    # ... whatever else you already have ...
+
+    # --- new fields for this feature ---
+    composition = models.ForeignKey(Composition,on_delete=models.PROTECT,related_name='medicines',null=True)
+    is_generic = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name

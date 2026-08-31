@@ -1,55 +1,142 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>medicines</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Bootstrap+Icons&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carely - Medicines</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <style>
-    .hero{
-    margin:0 20px 20px;
-    border-radius:22px;
-    background:linear-gradient(135deg,var(--teal-700) 0%, var(--teal-500) 55%, var(--teal-300) 100%);
-    padding:20px 0 0 20px;
-    position:relative;
-    overflow:hidden;
-    min-height:190px;
-    box-shadow:0 14px 30px rgba(14,107,100,0.35);
+  :root{
+    --teal-900:#0b3d3a;
+    --teal-700:#0e6b64;
+    --teal-500:#12958a;
+    --teal-100:#e3f6f3;
+    --blue-700:#3f6fe0;
+    --blue-400:#7ea2f5;
+    --mint-bg:#f7fbfa;
+    --text-dark:#0f2b28;
+    --text-mid:#5a6b69;
+    --text-light:#93a3a1;
+    --green:#1fa669;
+    --red:#e5484d;
+    --shadow-soft:0 8px 22px rgba(15,43,40,0.07);
+    --nav-height:64px;
   }
-  .hero-label{
-    font-size:11px;
-    letter-spacing:0.5px;
-    text-transform:uppercase;
-    color:rgba(255,255,255,0.75);
-    font-weight:600;
-    margin-bottom:4px;
+  *{box-sizing:border-box;}
+  html, body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:var(--mint-bg);
+    color:var(--text-dark);
   }
-  .hero h2{
-    font-family:'Poppins',sans-serif;
-    color:#fff;
-    font-size:19px;
-    line-height:1.3;
-    font-weight:700;
-    margin:0 0 10px;
-    max-width:150px;
+
+  /* APP SHELL — fluid width, no fixed phone bezel */
+  .app-shell{
+    width:100%;
+    max-width:480px;
+    margin:0 auto;
+    background:var(--mint-bg);
+    padding-bottom:calc(var(--nav-height) + 10px);
   }
-  .hero ul{
-    list-style:none;
-    padding:0;
-    margin:0 0 16px;
-    font-size:12px;
-    color:rgba(255,255,255,0.92);
-    font-weight:500;
+
+  .page-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px 12px;
   }
-  .hero ul li{
-    margin-bottom:4px;
-    display:flex;
-    align-items:center;
-    gap:6px;
+  .page-header .left{display:flex;align-items:center;gap:14px;}
+  .back-btn{color:var(--text-dark);font-size:17px;cursor:pointer;}
+  .page-header h1{
+    font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;
+    color:var(--text-dark);margin:0;
   }
-  .hero ul li i{font-size:11px;color:#ffe08a;}
+
+  .search-wrap{
+    margin:0 20px 16px;display:flex;align-items:center;background:#fff;
+    border-radius:14px;padding:11px 14px;box-shadow:var(--shadow-soft);gap:10px;
+  }
+  .search-wrap i.search-ic{color:var(--text-light);font-size:15px;flex-shrink:0;}
+  .search-wrap input{
+    border:none;outline:none;flex:1;font-size:13px;color:var(--text-dark);
+    background:transparent;font-family:'Inter',sans-serif;min-width:0;
+  }
+  .search-wrap input::placeholder{color:var(--text-light);}
+  .search-wrap .hero-btn{flex-shrink:0;}
+
+  .promo-banner{
+    margin:0 20px 22px;border-radius:18px;
+    background:linear-gradient(120deg,var(--teal-700) 0%, var(--teal-500) 100%);
+    padding:20px;position:relative;overflow:hidden;min-height:108px;
+    box-shadow:0 12px 26px rgba(14,107,100,0.3);
+  }
+  .promo-banner h2{
+    font-family:'Poppins',sans-serif;color:#fff;font-size:17px;font-weight:700;
+    margin:0 0 6px;max-width:190px;line-height:1.35;
+  }
+  .promo-banner p{
+    color:rgba(255,255,255,0.9);font-size:12px;margin:0;max-width:180px;font-weight:500;
+  }
+  .promo-icons{
+    position:absolute;right:14px;top:50%;transform:translateY(-50%);
+    display:flex;align-items:center;gap:6px;
+  }
+  .promo-icons .pill-icon{
+    width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.22);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;
+  }
+  .promo-icons .plus-badge{
+    width:30px;height:30px;border-radius:50%;background:#fff;
+    display:flex;align-items:center;justify-content:center;color:var(--teal-700);
+    font-size:13px;position:absolute;top:-4px;right:-2px;box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  }
+
+  .section-head{
+    display:flex;align-items:center;justify-content:space-between;padding:0 20px 12px;
+  }
+  .section-head h3{
+    font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--text-dark);margin:0;
+  }
+  .section-head a{font-size:12.5px;color:var(--teal-500);font-weight:600;text-decoration:none;}
+
+  .medicine-list{padding:0 20px 24px;}
+  .medicine-card{
+    background:#fff;border-radius:16px;padding:12px;display:flex;align-items:center;
+    gap:12px;box-shadow:var(--shadow-soft);margin-bottom:10px;
+  }
+  .med-thumb{
+    width:56px;height:56px;border-radius:12px;background:var(--teal-100);
+    display:flex;align-items:center;justify-content:center;color:var(--teal-500);
+    font-size:22px;flex-shrink:0;overflow:hidden;
+  }
+  .med-thumb img{width:100%;height:100%;object-fit:contain;}
+  .med-info{flex:1;min-width:0;}
+  .med-info h4{margin:0 0 3px;font-size:13.5px;font-weight:700;color:var(--text-dark);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .med-info p{margin:0;font-size:11.5px;color:var(--text-mid);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .med-price{text-align:right;flex-shrink:0;}
+  .med-price .amt{font-size:14px;font-weight:700;color:var(--text-dark);}
+  .med-price .mrp{font-size:10.5px;color:var(--text-light);text-decoration:line-through;}
+  .med-price .off{
+    display:inline-block;margin-top:4px;padding:2px 6px;border-radius:5px;
+    font-size:9px;font-weight:700;background:var(--teal-100);color:var(--teal-700);
+  }
+
+  .empty-state{
+    text-align:center;padding:30px 20px;color:var(--text-light);font-size:12.5px;
+  }
+
+  /* Bottom nav — tab bar on mobile, flips to a top navbar on desktop */
+  .bottom-nav{
+    display:flex;justify-content:space-around;align-items:center;background:#fff;
+    padding:10px 6px 14px;box-shadow:0 -4px 16px rgba(0,0,0,0.06);
+    position:fixed;left:0;right:0;bottom:0;
+    max-width:480px;margin:0 auto;z-index:20;
+  }
+  .nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--text-light);font-size:9.5px;font-weight:600;text-decoration:none;flex:1;}
+  .nav-item i{font-size:18px;}
+  .nav-item.active{color:var(--teal-500);}
   .hero-btn{
     display:inline-flex;
     align-items:center;
@@ -65,25 +152,185 @@
     font-family:'Inter',sans-serif;
   }
   .hero-btn i{font-size:12px;}
-  .hero-doctor{
-    position:absolute;
-    right:-6px;
-    bottom:0;
-    width:150px;
-    object-fit:contain;
-    object-position:bottom;
+
+  /* ============ TABLET (>=600px) ============ */
+  @media (min-width:600px){
+
+    .app-shell{
+      max-width:720px;
+    }
+
+    .bottom-nav{
+      max-width:720px;
+    }
+
+    .promo-banner{
+      min-height:130px;
+    }
+  }
+
+  /* ============ DESKTOP (>=1024px) ============ */
+  @media (min-width:1024px){
+
+    body{
+      display:flex;
+      justify-content:center;
+    }
+
+    .app-shell{
+      max-width:1100px;
+      padding-left:24px;
+      padding-right:24px;
+      padding-bottom:40px;
+    }
+
+    .page-header,
+    .search-wrap,
+    .promo-banner,
+    .section-head,
+    .medicine-list{
+      margin-left:0;
+      margin-right:0;
+      padding-left:0;
+      padding-right:0;
+    }
+
+    /* nav flips to a sticky top bar */
+    .bottom-nav{
+      position:sticky;
+      top:0;
+      bottom:auto;
+      left:auto;
+      right:auto;
+      max-width:none;
+      width:100%;
+      margin:0;
+      justify-content:flex-end;
+      gap:32px;
+      padding:16px 0;
+      box-shadow:0 4px 16px rgba(0,0,0,0.05);
+      border-bottom:1px solid var(--teal-100);
+    }
+
+    .bottom-nav::before{
+      content:"Carely";
+      order:-1;
+      margin-right:auto;
+      font-family:'Poppins',sans-serif;
+      font-weight:700;
+      font-size:18px;
+      color:var(--teal-700);
+    }
+
+    .nav-item{
+      flex-direction:row;
+      flex:none;
+      gap:6px;
+      font-size:13px;
+    }
+
+    .nav-item i{font-size:16px;}
+
+    .page-header{padding-top:24px;}
+    .page-header h1{font-size:24px;}
+
+    /* search + promo side by side */
+    .top-row{
+      display:grid;
+      grid-template-columns:1fr 1.3fr;
+      gap:20px;
+      align-items:stretch;
+      margin-bottom:22px;
+    }
+
+    .search-wrap{margin-bottom:0;height:100%;}
+    .promo-banner{margin-bottom:0;min-height:auto;}
+
+    .section-head h3{font-size:20px;}
+
+    /* medicine cards become a responsive grid instead of a stacked list */
+    .medicine-list{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+      gap:16px;
+    }
+
+    .medicine-card{margin:0;}
   }
 </style>
 </head>
 <body>
-     <div class="hero-nav">
 
-                <div
-                    class="hero-btn"
-                    onclick="history.back()"
-                >
-                    <i class="bi bi-arrow-left"></i>
-                </div>
-    <h1>conming soon</h1>
+<div class="app-shell">
+
+  <div class="bottom-nav">
+    <a href="{% url 'hospital-home' %}" class="nav-item"><i class="bi bi-house-door"></i><span>Home</span></a>
+    <a href="{% url 'medicines' %}" class="nav-item active"><i class="bi bi-capsule"></i><span>Medicines</span></a>
+    <a href="{% url 'speciality' %}" class="nav-item"><i class="bi bi-bank"></i><span>Speciality</span></a>
+  </div>
+
+  <div class="page-header">
+    <div class="left">
+      <i class="bi bi-arrow-left back-btn" onclick="history.back()"></i>
+      <h1>Medicines</h1>
+    </div>
+  </div>
+
+  <div class="top-row">
+
+    <form>
+      <div class="search-wrap">
+        <i class="bi bi-search search-ic"></i>
+        <input name="search" type="text" placeholder="Search medicine...">
+        <button type="submit" class="hero-btn">Search <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </form>
+
+    <div class="promo-banner">
+      <h2>Save up to 40% on medicines</h2>
+      <p>Compare prices & save more</p>
+      <div class="promo-icons">
+        <div class="pill-icon">
+          <i class="bi bi-capsule"></i>
+          <div class="plus-badge"><i class="bi bi-plus-lg"></i></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-head">
+    <h3>Popular Medicines</h3>
+    <a href="#">See all</a>
+  </div>
+
+  <div class="medicine-list">
+    {% for m in medicines %}
+    <div class="medicine-card">
+      <div class="med-thumb">
+        {% if m.image %}
+          <img src="{{ m.image.url }}" alt="{{ m.name }}">
+        {% else %}
+          <i class="bi bi-capsule"></i>
+        {% endif %}
+      </div>
+      <div class="med-info">
+        <h4>{{ m.name }}</h4>
+        <p>{{ m.Group_name }}</p>
+        <h4>{{ m.tablets }} Tablets</h4>
+      </div>
+      <div class="med-price">
+        <div class="amt">₹{{ m.price }}</div>
+        {% if m.mrp %}<div class="mrp">₹{{ m.mrp }}</div>{% endif %}
+        {% if m.discount_percent %}<div class="off">{{ m.discount_percent }}% OFF</div>{% endif %}
+      </div>
+    </div>
+    {% empty %}
+    <div class="empty-state">No medicines available</div>
+    {% endfor %}
+  </div>
+
+</div>
+
 </body>
 </html>

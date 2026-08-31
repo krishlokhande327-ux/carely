@@ -22,8 +22,8 @@ def details(request,id):
     hospital_data = get_object_or_404(Hospital , id=id)
     return render(request,'hospital_details.html',{'hospital': hospital_data})
 
-def medicines(request):
-    return render(request, 'medicines.html')  
+# def medicines(request):
+#     return render(request, 'medicines.html')  
 # def nearby_hospitals_page(request):
 #     """Renders the map page (nearby_hospitals.html)."""
 #     return render(request, "nearby_hospitals.html")
@@ -55,3 +55,40 @@ def medicines(request):
 #         for h in qs
 #     ]
 #     return JsonResponse({"hospitals": data})
+
+def medicines(request):
+    medicines = Medicine.objects.all()
+    query = request.GET.get('search', '').strip()
+
+    if query:
+        medicines = medicines.filter(name__icontains=query)
+
+    return render(
+        request,
+        'medicines.html',
+        {
+            'medicines': medicines,
+            'query': query,
+        },
+    )
+    # query = request.GET.get('search', '').strip()
+    # branded_medicine = None
+    # generic_alternatives = []
+
+    # if query:
+    #     branded_medicine = Medicine.objects.filter(
+    #         name__icontains=query, is_generic=False
+    #     ).select_related('composition').first()
+
+    #     if branded_medicine and branded_medicine.composition:
+    #         generic_alternatives = Medicine.objects.filter(
+    #             composition=branded_medicine.composition,
+    #             is_generic=True
+    #         ).exclude(id=branded_medicine.id).order_by('price')
+
+    # context = {
+    #     'query': query,
+    #     'branded_medicine': branded_medicine,
+    #     'generic_alternatives': generic_alternatives,
+    # }
+    # return render(request, 'medicines.html', context)
